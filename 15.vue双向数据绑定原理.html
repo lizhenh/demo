@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div id="app">
+      MVC模式（modle view controller）
+      以往的MVC模式是单向绑定，即Model绑定到View，当我们用JavaScript代码更新Model时，View就会自动更新
+
+      MVVM模式
+      自动反映在 ViewModel，反之亦然。 我对于双向绑定的理解，
+      就是用户更新了View，Model的数据也自动被更新了，这种情况就是双向绑定。
+      再说细点，就是在单向绑定的基础上给可输入元素（input、textare等）添加了change(input)事件,(change事件触发，View的状态就被更新了)来动态修改model。 
+      
+      vue数据双向绑定是通过数据劫持结合发布者-订阅者模式的方式来实现的。
+      实现数据的双向绑定：
+      1.实现一个监听器Observer，用来劫持并监听所有属性，如果有变动的，就通知订阅者。
+      2.实现一个订阅者Watcher，每一个Watcher都绑定一个更新函数，
+        watcher可以收到属性的变化通知并执行相应的函数，从而更新视图。
+      3.实现一个解析器Compile，可以扫描和解析每个节点的相关指令（v-model，v-on等指令），
+        如果节点存在v-model，v-on等指令，则解析器Compile初始化这类节点的模板数据，
+        使之可以显示在视图上，然后初始化相应的订阅者（Watcher）。
+
+    </div>
+    <!-- <script src="./vue2.5.js"></script> -->
+    <script>
+      // new Vue({
+      //     el: "#app",
+      //     data() {
+      //         return {
+      //             obj: {
+      //                 a: 1
+      //             }
+      //         }
+      //     },
+      //     created() {
+      //         console.log(this.obj)
+      //     }
+      // })
+      //我们可以看到属性a有两个相对应的get和set方法，
+      // 为什么会多出这两个方法呢？因为vue是通过Object.defineProperty()来实现数据劫持的。
+      // var Book = {
+      //     name: 'vue权威指南'
+      // };
+      // console.log(Book.name); // vue权威指南
+
+      var Book = {};
+      var name = "";
+      Object.defineProperty(Book, "name", {
+        set: function(value) {
+          name = value;
+          console.log("你取了一个书名叫做" + value);
+        },
+        get: function() {
+          return "《" + name + "》";
+        }
+      }); 
+      Book.name = "vue权威指南";
+      console.log(Book.name);
+      console.log(Book);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      //执行上下文
+
+      // 变量提升
+
+      //   console.log(a); // undefined
+      //   var a = 100;
+      //   fn("zhangsan"); // 'zhangsan' 20
+      //   function fn(name) {
+      //     age = 20;
+      //     console.log(name, age);
+      //     var age;
+      //   }
+
+      // this
+      // 先搞明白一个很重要的概念—— this 的值是在执行的时候才能确认， 定义的时候不能确认！
+      // var a = {
+      //     name: 'A',
+      //     fn: function () {
+      //         console.log(this.name)
+      //     }
+      // }
+      // a.fn() // this === a
+      // a.fn.call({
+      //     name: 'B'
+      // }) // this === {name: 'B'}
+
+      //作用域
+      //ES6 之前 JS 没有块级作用域。 例如
+
+      // if (true) {
+      //     var name = 'zhangsan'
+      // }
+      // console.log(name)
+
+      // 从上面的例子可以体会到作用域的概念， 作用域就是一个独立的地盘， 让变量不会外泄、
+      // 暴露出去。 上面的 name 就被暴露出去了， 因此， JS 没有块级作用域， 只有全局作用域和函数作用域。
+
+      //附：ES6 中开始加入了块级作用域，使用 let 定义变量即可，如下：
+      //   if (true) {
+      //     let name = "zhangsan";
+      //   }
+      //   console.log(name); // 报错，因为let定义的name是在if这个块级作用域
+
+      // 作用域链
+      // 首先认识一下什么叫做 自由变量 。如下代码中， console.log(a) 要得到 a 变量，但是在
+      // 当前的作用域中没有定义 a （可对比一下 b ）。当前作用域没有定义的变量，这成为 自由
+      // 变量 。自由变量如何得到 —— 向父级作用域寻找。
+      //   var a = 100;
+      //   function fn() {
+      //     var b = 200;
+      //     console.log(a);
+      //     console.log(b);
+      //   }
+      //   fn();
+
+      // 如果父级也没呢？再一层一层向上寻找，直到找到全局作用域还是没找到，就宣布放弃。
+      // 这种一层一层的关系，就是 作用域链 。
+      //   function F1() {
+      //     var a = 100;
+      //     return function() {
+      //       console.log(a);
+      //     };
+      //   }
+      //   var f1 = F1();
+      //   var a = 200;
+      //   f1();
+
+      //   function F1() {
+      //     var a = 100;
+      //     return function() {
+      //       console.log(a);
+      //     };
+      //   }
+      //   function F2(f1) {
+      //     var a = 200;
+      //     console.log(f1());
+      //   }
+      //   var f1 = F1();
+      //   F2(f1);
+
+      //同步
+      //   console.log(100);
+      //   alert(200); // 1秒钟之后点击确认
+      //   console.log(300);
+
+      //异步
+      //   console.log(100);
+      //   setTimeout(function() {
+      //     console.log(200);
+      //   }, 1000);
+      //   console.log(300);
+    </script>
+  </body>
+</html>

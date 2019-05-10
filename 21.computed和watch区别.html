@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    计算机属性和实例方法的区别:
+
+        1.计算属性有缓存，而实例方法没有缓存。
+        2.使用计算属性的时候，{{计算机属性名}}}
+        使用实例方法的时候，{{实例方法()}}
+        3.实例方法可以传递参数，但是计算机属性不能
+        共同点：
+        实例方法和计算机属性都会监听原数据
+
+    watch
+
+    监听某一个值，当被监听的值发生变化时，执行对应的操作
+    computed
+
+    当页面中有某些数据依赖其他数据进行变动的时候，可以使用计算属性。
+    
+
+    ## computed 和 watch 区别
+
+    `computed` 是计算属性，依赖其他属性计算值，并且 `computed` 的值有缓存，只有当计算值变化才会返回内容。
+
+    `watch` 监听到值的变化就会执行回调，在回调中可以进行一些逻辑操作。
+
+    所以一般来说需要依赖别的属性来动态获得值的时候可以使用 `computed`，对于监听到值的变化需要做一些复杂业务逻辑的情况可以使用 `watch`。
+
+    <div id="app">
+        <input type="text" v-model="msg" name="" id="">
+    </div>
+    <script src="./vue2.5.js"></script>
+    <script>
+        new Vue({
+            el: "#app",
+            data() {
+                return {
+                    msg: ''
+                }
+            },
+            methods: {},
+            watch: {
+                msg: function (newdata, olddata) {
+                    //newdata 输入框新输入的数据    
+                    //olddata 上一次输入框输入的数据
+                    console.log('这是上一个输入的内容' + olddata);
+                    console.log('这是新输入的内容' + newdata);
+                }
+            }
+        })
+    </script>
+
+</body>
+
+</html>

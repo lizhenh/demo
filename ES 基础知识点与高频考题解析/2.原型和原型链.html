@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 题目：如何理解 JavaScript 的原型
+
+        // 所有的引用类型（数组、对象、函数），都具有对象特性，即可自由扩展属性（null除外）
+        // 所有的引用类型（数组、对象、函数），都有一个 __proto__ 属性，属性值是一个普通的对象
+        // 所有的函数，都有一个 prototype 属性，属性值也是一个普通的对象
+        // 所有的引用类型（数组、对象、函数）， __proto__ 属性值指向它的构造函数的prototype 属性值
+
+        // 要点一：自由扩展属性
+        // var obj = {};
+        // obj.a = 100;
+        // var arr = [];
+        // arr.a = 100;
+
+        // function fn() {}
+        // fn.a = 100;
+        // 要点二：__proto__
+        // console.log(obj.__proto__);
+        // console.log(arr.__proto__);
+        // console.log(fn.__proto__);
+
+        // 要点三：函数有 prototype
+        // console.log(fn.prototype)
+
+        // 要点四：引用类型的 __proto__ 属性值指向它的构造函数的 prototype 属性值
+        // console.log(obj.__proto__ === Object.prototype)
+
+
+        // 构造函数
+        // function Foo(name, age) {
+        //     this.name = name
+        // }
+        // Foo.prototype.alertName = function () {
+        //     alert(this.name)
+        // }
+        // 创建示例
+        //  var f = new Foo('zhangsan')
+        //  console.log(f.list)
+        // f.printName = function () {
+        //     console.log(this.name)
+        // }
+        //测试
+        // f.printName()
+        // f.alertName()
+
+        // 执行 printName 时很好理解， 但是执行 alertName 时发生了什么？ 这里再记住一个重点 当
+        // 试图得到一个对象的某个属性时， 如果这个对象本身没有这个属性， 那么会去它的
+        // __proto__（ 即它的构造函数的 prototype） 中寻找， 因此 f.alertName 就会找到
+        // Foo.prototype.alertName。
+
+
+        //原型链
+        
+    </script>
+</body>
+
+</html>
+
+
+

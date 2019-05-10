@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*利用promise封装的ajax函数*/
+
+        function ajax(method, url, data) {
+
+            /*兼容IE*/
+
+            var request;
+
+            if (window.XMLHttpRequest) {
+
+                request = new XMLHttpRequest();
+
+            } else {
+
+                request = new ActiveXObject("Microsoft.XMLHTTP")
+
+            }
+
+            return new Promise(function (resolve, reject) {
+
+                request.onreadystatechange = function () {
+
+                    if (request.readyState === 4) {
+
+                        if (request.status === 200) {
+                            //将对象转化为字符串
+                            resolve(JSON.parse(request.response));
+                        } else {
+                            reject(request.status);
+                        }
+                    }
+                };
+
+                function formatParams() {
+                    let arr = [];
+                    for (var name in data) {
+                        arr.push(name + '=' + data[name]);
+                    }
+                    return arr.join('&')
+                }
+                if (method.toUpperCase() === "GET") {
+                    request.open("GET", url + "?" + formatParams(data), true);
+                    request.send(null);
+                } else if (method.toUpperCase() === "POST") {
+                    request.open("POST", url, true);
+                    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;charset=utf-8');
+                    request.send(formatParams(data));
+                }
+            });
+        };
+
+        /*使用方法*/
+
+
+
+        //get有参数请求数据
+        // var obj = {
+
+        //     access_token: '3452d32463e1b36ad94ee56931ea3cf0',
+
+        //     pageNumber: 1,
+
+        //     pageSize: 20
+
+        // }
+
+        // var url = 'https://denterpriseapi.coolcollege.cn/course/queryCourseByPage'
+
+        // //开始调用接口
+
+        // ajax('get', url, obj).then(function (data) {
+
+        //     console.log(data)
+
+        // }).catch(function (err) {
+
+        //     console.log(err)
+
+        // })
+
+
+
+
+        //post有参数请求数据
+        // var obj = {
+        //     'listid':'002'
+        // }
+        // var url = 'http://rap2api.taobao.org/app/mock/120285/gamelist'
+        // ajax('post', url, obj).then(function (data) {
+        //     console.log(data)
+        // }).catch(function (err) {
+        //     console.log(err)
+        // })
+
+
+
+        //get无参数请求数据
+        var obj = {
+        }
+        var url = 'http://rap2api.taobao.org/app/mock/161778/app'
+        ajax('get', url, obj).then(function (data) {
+            console.log(data)
+        }).catch(function (err) {
+            console.log(err)
+        })
+
+
+
+        //post无参数请求数据
+        // var obj = {
+        // }
+        // var url = 'http://rap2api.taobao.org/app/mock/161778/url'
+        // ajax('post', url, obj).then(function (data) {
+        //     console.log(data)
+        // }).catch(function (err) {
+        //     console.log(err)
+        // })
+    </script>
+
+</body>
+
+</html>

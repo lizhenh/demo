@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="container">
+		<form>
+		  <div class="form-group">
+		    <label for="exampleInputFile">File input</label>
+		    <input type="file" id="exampleInputFile" onChange='inputChange(this)'>
+		    <div id="box"></div>
+		    <div id="boxs"></div>
+		  </div>
+		</form>
+	</div>
+	<script>
+		// 图片
+		var newArr=[];
+		// 视频
+		var newData=[]
+		// 上传
+		var inputChange=function(t){
+			var file=document.getElementById('exampleInputFile').value
+			var index = file.lastIndexOf('.');
+			var extension =  file.substr(index +  1);
+			if(extension=='mp4'){
+				newData.push(window.URL.createObjectURL(t.files[0]))
+				var str=''
+				for(var i=0;i<newData.length;i++){
+					str+=`<video src="${newData[i]}" controls width="300"></video>`
+				}
+				boxs.innerHTML=str
+			}
+			
+			var arr = ['jpeg','png','jpg','gif'];
+			if(isInArray(arr,extension)){
+				newArr.push(window.URL.createObjectURL(t.files[0]))
+				render()
+			}
+		}
+		// 渲染
+		var render=function(){
+			var str=''
+			for(var i=0;i<newArr.length;i++){
+				str+=`<img src="${newArr[i]}" alt="" id="img" style='border:1px solid red;width:200px;height:200px;'>`
+			}
+			box.innerHTML=str
+		}
+		function isInArray(arr,value){
+	        for(var i = 0; i < arr.length; i++){
+	            if(value === arr[i]){
+	                return true;
+	            }
+	        }
+	        return false;
+	    }
+	</script>
+</body>
+</html>

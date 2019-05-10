@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //距离XX还剩下多少天
+        function dateCount() {
+            // 获取现在的时间
+            var date = new Date();
+            console.log(date);
+            // 2020的第一天
+            var until = new Date('2020-01-01 00:00:00');
+            console.log(until)
+            // 计算时会发生隐式转换，调用valueOf()方法，转化成时间戳的形式
+            console.log(until - date)
+            var days = (until - date) / 1000 / 3600 / 24;
+            console.log(days)
+            // 下面都是简单的数学计算 
+            var day = Math.floor(days);
+            var hours = (days - day) * 24;
+            var hour = Math.floor(hours);
+            var minutes = (hours - hour) * 60;
+            var minute = Math.floor(minutes);
+            var seconds = (minutes - minute) * 60;
+            var second = Math.floor(seconds);
+            var back = '2019年还剩下' + day + '天' + hour + '小时' + minute + '分钟' + second + '秒';
+            return back;
+        }
+        dateCount()
+    </script>
+
+</body>
+
+</html>

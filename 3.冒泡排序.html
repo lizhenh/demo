@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var arr = [1, 4, 5, 12, 43, 3, 10, 8, 20];
+        function fn(arr){
+            for(var i=0;i<arr.length;i++){
+                for(var j=i+1;j<arr.length;j++){
+                    if(arr[i]>arr[j]){
+                      var templet=arr[i];
+                      arr[i]=arr[j];
+                      arr[j]=templet;  
+                    }
+                }
+            }
+            return arr
+        }
+        console.log(fn(arr))
+    </script>
+</body>
+
+</html>

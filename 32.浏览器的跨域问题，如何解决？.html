@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    跨域问题：
+    1995年，同源政策由 Netscape 公司引入浏览器
+    跨域，指的是浏览器不能执行其他网站的脚本。它是由浏览器的同源策略造成的，是浏览器施加的安全限制。
+    所谓同源是指，域名，协议，端口均相同
+
+    同源策略限制以下几种行为：
+    1.) Cookie、LocalStorage 和 IndexDB 无法读取
+    2.) DOM 和 Js对象无法获得
+    3.) AJAX 请求不能发送
+
+    1、JSONP：
+    但是要注意JSONP只支持GET请求，不支持POST请求。
+    jquery的ajax简单描述：
+    前端指明dataType:jsonp , 在标明自定义的参数名 jsonp:jsoncallback
+    2.使用 跨域资源共享（Cross-Origin Resource Sharing，简称 CORS）
+    添加响应头，允许跨域 
+　　addHeader(‘Access-Control-Allow-Origin:*’);//允许所有来源访问 
+　　addHeader(‘Access-Control-Allow-Method:POST,GET’);//允许访问的方式
+    3.使用 window.postMessage方法
+    目前IE8+、FireFox、Chrome、Opera等浏览器都已经支持该方法
+    postMessage方法的第一个参数是具体的信息内容，
+    第二个参数是接收消息的窗口的源（origin），即"协议 + 域名 + 端口"。也可以设为*，表示不限制域名，
+    向所有窗口发送。
+    4.使用代理服务器，使用代理方式跨域更加直接，因为同源策略是限制浏览器实现的，
+    如果请求不是从浏览器发起的，就不存在跨域问题了。
+    5.使用window.name来进行跨域
+    这种方法的优点是，window.name容量很大，可以放置非常长的字符串；
+    缺点是必须监听子窗口window.name属性的变化，影响网页性能。
+
+    message事件的事件对象event，提供以下三个属性。
+    event.source：发送消息的窗口
+    event.origin: 消息发向的网址
+    event.data: 消息内容
+
+    4.使用window.name
+
+    这种方法的优点是，window.name容量很大，可以放置非常长的字符串；
+    缺点是必须监听子窗口window.name属性的变化，影响网页性能。
+
+    jsonp的实现原理：
+    jsonp并不是一种数据格式，而json是一种数据格式，
+    jsonp是用来解决跨域获取数据的一种解决方案，具体是通过动态创建script标签，
+    然后通过标签的src属性获取js文件中的js脚本，该脚本的内容是一个函数调用，
+    参数就是服务器返回的数据，为了处理这些返回的数据，需要事先在页面定义好回调函数，
+    本质上使用的并不是ajax技术
+
+</body>
+
+</html>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+	<!-- <script src='bootstrap/js/bootstrap.min.js'></script> -->
+	<!-- <script src='jquery-1.11.3.min.js'></script> -->
+	<!-- <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css"> -->
+	<!-- <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css"> -->
+	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<style>
+		.THead{
+			background-color: blue;
+			color: white;
+		}
+	</style>
+	<!-- html -->
+	<div class="alert">
+	  <button type="button" class="close" data-dismiss="alert">&times;</button>
+	  <strong>Warning!</strong> Best check yo self, you're not looking too good.
+	</div>
+	<div class="container">
+		<!-- 添加 -->
+		<form class="form-inline">
+		  <input type="text" class="input-small" placeholder="ID" id="IDS">
+		  <input type="text" class="input-small" placeholder="NAME" id="NAMES">
+		  <button type="button" class="btn btn-primary" onclick='add()'>添加</button>
+		</form>
+		<!-- 搜索 -->
+		<form class="form-search">
+			<select class="span2" onchange='selectChange()'>
+				<option value="1">ID查询</option>
+				<option value="2">名称查询</option>
+			</select>
+		    <input type="number" class="input-medium search-query" id="searchs" oninput='searchText()'>
+		    <button type="button" class="btn btn-success" onclick='search()'>Search</button>
+		</form>
+		<!-- table -->
+		<table class="table table-bordered table-hover">
+			<thead class="THead">
+				<tr style='cursor: pointer;'>
+					<td>ID</td>
+					<td>NAME</td>
+					<td>创建时间</td>
+					<td>操作</td>
+				</tr>
+			</thead>
+			<tbody style='font-weight: bold;font-size: 15px;' id="tbodys"></tbody>
+		</table>
+	</div>
+	<!-- modal -->
+	<div class="modal hide fade" id="myModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+						&times;
+					</button>
+					<h4 class="modal-title" id="myModalLabel">
+						更改
+					</h4>
+				</div>
+				<div class="modal-body" id="modalBody">	
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default btn-warning" data-dismiss="modal" onclick='SubmitChanges()'>更改
+					</button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal -->
+	</div>
+	<!-- js -->
+	<script>
+		// 默认使用搜索方式ID查询
+		var currentValue=1
+		// 要修改的数据
+		var currentIndex=0
+		// 渲染
+		var str='';
+		function render(newData){
+			var all=localStorage.getItem('Data')
+			var newD=newData?newData:JSON.parse(all)
+			str=''
+			for(var i=0;i<newD.length;i++){
+				str+=`<tr style='cursor: pointer;'>
+					<td>${newD[i].id}</td>
+					<td>${newD[i].name}</td>
+					<td>${time(newD[i].createTime)}</td>
+					<td><button class='btn btn-info' type="button" data-toggle="modal" data-target="#myModal" onclick='modify(${i})'>修改</button>&nbsp;&nbsp;<button class='removes btn btn-danger' onclick='remove(${i})'>删除</button></td>
+				</tr>`
+			}
+			tbodys.innerHTML=str
+		}
+		render()
+		// 增加
+		var add = function(){
+			var all=localStorage.getItem('Data')
+			all=JSON.parse(all)
+			var objs={id:parseInt(IDS.value),name:NAMES.value,createTime:new Date().getTime()}
+			all.push(objs)
+			localStorage.setItem('Data',JSON.stringify(all))
+			render()
+			IDS.value='';
+			NAMES.value='';
+		}
+		// 删除
+		var removesList=document.getElementsByClassName('removes')
+		var remove=function(i){
+			var all=localStorage.getItem('Data')
+			all=JSON.parse(all)
+			all.splice(i,1)
+			localStorage.setItem('Data',JSON.stringify(all))
+			render()
+		}
+		// 搜索
+		var newObj=[]
+		var search=function(){
+			var all=localStorage.getItem('Data')
+			all=JSON.parse(all)
+			if(currentValue==1){
+				newObj=[]
+				all.forEach(function(v,i){
+					if(v.id==searchs.value){
+						newObj.push(all[i])
+					}
+					render(newObj)
+				})
+			}else if(currentValue==2){
+				newObj=[]
+				all.forEach(function(v,i){
+					if(v.name.indexOf(searchs.value)!=-1){
+						newObj.push(all[i])
+					}
+					render(newObj)
+				})
+			}
+		}
+		// 清空搜索的关键字
+		var searchText=function(){
+			console.log(event)
+			if(searchs.value==''){
+				render()
+			}
+		}
+		// 搜索方式改变
+		var selectChange=function(){
+			currentValue=event.srcElement.value
+			if(currentValue==1){
+				searchs.type='number'
+			}else{
+				searchs.type='text'
+			}
+		}
+		// 提交修改
+		var SubmitChanges=function(){
+			var all=localStorage.getItem('Data')
+			all=JSON.parse(all)
+			all[currentIndex].id=parseInt(inputEmail.value)
+			all[currentIndex].name=inputPassword.value
+			localStorage.setItem('Data',JSON.stringify(all))
+			render()
+		}
+		// 修改
+		var modify=function(i){
+			currentIndex=i
+			var all=localStorage.getItem('Data')
+			all=JSON.parse(all)
+			var strings=`<form class="form-horizontal">
+				  <div class="control-group">
+				    <label class="control-label" for="inputEmail">ID</label>
+				    <div class="controls">
+				      <input type="text" id="inputEmail" value="${all[i].id}">
+				    </div>
+				  </div>
+				  <div class="control-group">
+				    <label class="control-label" for="inputPassword">NAME</label>
+				    <div class="controls">
+				      <input type="text" id="inputPassword" value="${all[i].name}">
+				    </div>
+				  </div>
+				</form>`
+			modalBody.innerHTML=strings
+		}
+
+
+
+		function time(data) {
+		    var time = new Date(data);
+		    var y = time.getFullYear();
+		    var m = time.getMonth() + 1;
+		    var d = time.getDate();
+		    var h = time.getHours();
+		    var mm = time.getMinutes();
+		    var s = time.getSeconds();
+	      return (y +"-" +add0(m) +"-" +add0(d) +" " +add0(h) +":" +add0(mm) + ":" +add0(s)
+	      	);
+    	}
+	    function add0(m) {
+	        return m < 10 ? "0" + m : m;
+	      }
+	</script>
+</body>
+</html>

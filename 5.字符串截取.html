@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //字符串
+        // 1. substr() 方法
+        // 语法： string.substr(start, length)
+        // 功能： 指定提取字符串中字符开始的位置(start下标) 以及字符长度(length)
+        // 备注： start可以是正数（ 字符串从左往右数的下标） 也可以是负数（ 从右往左数的下标）， - 1
+        // 指字符串中最后一个字符， - 2 指倒数第二个字符；
+        // 如果不备注length那么默认到字符串结尾的位置。
+        // 2.substring()方法
+        // 语法：string.substring(from,end)
+        // 功能：指定提取字符串中字符开始的位置(from)以及结束的位置(end)
+        // 包括start位置的字符但是不包括end位置的字符。
+        // 备注：start只能是正数
+        // 如果不备注to那么默认到字符串结尾的位置
+        // 3.string.slice(beginSlice[, endSlice])
+        // 截取从start的位置开始，到end位置结束<不包含end位置上的字符>的字符，
+        // 并返回这个新的字符串，不改变原字符串
+        // beginSlice： 起始位置,如果是负数，则用字符串的长度+这个负数值，
+        // 或者是从右向左数start位确定起始位置，超过字符串长度默认为当前长度
+        // endSlice： 结束位置，默认为字符的长度,如果是负数，
+        // 则用字符串的长度+这个负数值，或者是从右向左数start位确定起始位置，
+        // 是0就全部为空字符串，超过字符串长度默认为当前长度
+        // 返回值： 返回截取后的字符串，没有返回一个空字符
+        // 4.函数：split() 
+        //   功能：使用一个指定的分隔符把一个字符串分割存储到数组 
+        // 5.函数：Join() 
+        //   功能：使用您选择的分隔符将一个数组合并为一个字符串 
+
+
+        var arr='hello word'
+        console.log(arr.slice())
+    </script>
+
+</body>
+
+</html>

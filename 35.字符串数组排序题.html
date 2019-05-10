@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="./vue2.5.js"></script>
+    <script>
+        var arr = ['1小时', '35分钟', '1.5小时', '40分钟'];
+        // 去掉字符串后3位
+        // var str = "abcdefg";
+        // var s1 = str.substring(0, str.length - 3);
+        var s = '';
+        var newArr=[];
+        for (var i = 0; i < arr.length; i++) {
+            s = arr[i].substring(0, arr[i].length - 2);
+            if (s == '1' || s == '1.5') {
+                s = s * 1 * 60;
+            } else {
+                s = s * 1
+            }
+            newArr.push(s)
+        }
+        console.log(newArr)
+    </script>
+
+</body>
+
+</html>

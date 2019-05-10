@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 什么是闭包？
+
+        // 闭包就是能够读取其他函数内部变量的函数
+        // Javascript语言中，只有函数内部的子函数才能读取局部变量，
+        // 因此可以把闭包简单理解成“定义在一个函数内部的函数”。
+        // 所以，在本质上，闭包就是将函数内部和函数外部连接起来的一座桥梁。
+
+        // 举个例子：
+        function f1() {
+            var n = 999;
+            nAdd = function () {
+                n += 1;
+            }
+
+            function f2() {
+                console.log(n);
+            }
+            return f2;
+        }
+        var result = f1();
+        result(); //从函数外部通过闭包f2获取到函数f1内部局部变量的值
+        nAdd(); //从函数外部通过闭包修改局部变量n的值
+        result(); //再次通过闭包f2获取到函数f1内部局部变量的值
+        
+        闭包的优点：
+        1.能够读取函数内部的变量 
+        2.让这些变量一直存在于内存中，不会在调用结束后，被垃圾回收机制回收
+
+        闭包的缺点：
+        1.由于闭包会使得函数中的变量都被保存在内存中，内存消耗很大
+        2.容易造成内存泄漏
+        
+        解决方法：
+        在退出函数之前，将不使用的局部变量全部删除。
+    </script>
+
+</body>
+
+</html>

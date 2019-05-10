@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        for (var i = 0; i < 5; i++) {
+            setTimeout(function () {
+                console.log(i)
+            }, 1000)
+        }
+
+        原题等价于：
+        var i = 0;
+        setTimeout(function () {
+            console.log(i);
+        }, 0);
+        console.log(i);
+        i++;
+        setTimeout(function () {
+            console.log(i);
+        }, 0);
+        console.log(i);
+        i++;
+        setTimeout(function () {
+            console.log(i);
+        }, 0);
+        console.log(i);
+        i++;
+        console.log(i)
+        
+        我想要让原题输出 0,1,2,3,4
+
+        第一种方法：
+        for (let i = 0; i < 5; i++) {
+            setTimeout(function () {
+                console.log(i)
+            }, 1000)
+        }
+        第二种方法：
+        for (let i = 0; i < 5; i++) {
+            (function(i){
+             setTimeout(function () {
+                console.log(i)
+            }, 1000)   
+          })(i)  
+        }
+
+        在setTimeout的时候， 匿名函数function() {console.log(i); }
+        会被声明创建， 当匿名函数执行的时候， 会查找当前运行环境的 i 的值。
+        var声明的 i， 运行环境的 i 的值为10， 但是let声明的 i， 运行环境中 i
+        的值是每一个循环创建匿名函数时候的 i。
+        所以得到了0 - 4 的值。
+
+        立即执行函数：
+        https://www.cnblogs.com/cnfxx/p/7337889.html
+
+        
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        beforeCreate() {
+            //组件创建前
+            //是获取不到'props'和'data'里面的数据的
+            //此时data和methods中的数据还没有完成初始化
+        }
+        created() {
+            //组件创建后
+            //data和methods已经完成初始化
+            //未挂载到dom 因此在页面上还看不到
+        }
+        beforeMount() {
+            //组件挂载前
+            //模板已经在内存中编译好了，但是还没有把模板渲染到真正的页面
+            //页面中的元素还没有被真正的替换过来 打印出来的只是一些模板字符串
+        }
+        mounted() {
+            //组件挂在后
+            //表示内存当中的模板 已经真正挂载到页面中了 用户已经能看到渲染后的页面
+        }
+        beforeUpdate() {
+            //更新前
+            //当执行 beforeUpdate 的时候，页面中显示的数据，还是旧的，此时 data 数据是新的，页面尚未和最新的数据保持同步
+        }
+        updated() {
+            //更新后
+            //updated 事件执行的时候，页面和data数据已经保持同步了，都是最新的
+        }
+        beforeDestroy() {
+            //销毁前
+            //此时实例仍然可用
+        }
+        destroyed() {
+            //销毁后
+            //vue所有实例指示的所有东西都会解绑，所有的事件监听器都会被移除，所有的子实例也会被销毁
+        }
+
+
+        // 使用keep-alive缓存组件后会激发两个钩子函数  用来对组件进行缓存，从而节省性能
+        activated() {
+            //组件被激活时触发
+        }
+        deactivated() {
+            //组件被停用或者离开路由后触发
+        }
+
+        //使用keep-alive之后再次进入路由不会触发:
+        // beforeCreate created  beforeMount mounted 这些钩子函数
+    </script>
+
+</body>
+
+</html>

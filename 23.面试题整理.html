@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    1.display:none和visibility:hidden的区别是：
+    display:none 隐藏不站位
+    visibility:hidden 隐藏站位
+
+    visibility具有继承性，给父元素设置visibility:hidden;
+    子元素也会继承这个属性。但是如果重新给子元素设置visibility: visible,
+    则子元素又会显示出来。这个和display: none有着质的区别
+
+    CSS3的transition支持visibility属性，但是并不支持display
+
+    扩展：
+    visibility 属性
+    visible默认值。元素是可见的。
+    hidden元素是不可见的。
+    collapse当在表格元素中使用时，此值可删除一行或一列，但是它不会影响表格的布局。被行或列占据的空间会留给其他内容使用。如果此值被用在其他的元素上，会呈现为 "hidden"。
+    inherit规定应该从父元素继承 visibility 属性的值。
+
+
+    2.常见的浏览器内核有哪些?
+    Gecko内核：火狐 -moz-
+    Webkit:谷歌 苹果 -webkit-
+    Presto:欧朋 -o-
+    Trident:IE 360 搜狗-ms-
+
+
+    3.实现不使用border画出1px高的线。在不同浏览器Quirksmode和csscompat模式下都能保持同一效果
+    <div style="height:1px;overflow:hidden;background:red"></div>
+
+
+    4.请描述一下cookie、sessionStorage和localStorage的区别？
+
+    相同点：都存储在客户端
+    不同点：
+
+    1.存储大小
+
+    cookie数据大小不能超过4k。
+    sessionStorage和localStorage 虽然也有存储大小的限制，但比cookie大得多，可以达到5M或更大。
+    2.有效时间
+
+    localStorage 存储持久数据，浏览器关闭后数据不丢失除非主动删除数据；
+    sessionStorage 数据在当前浏览器窗口关闭后自动删除。
+    cookie 设置的cookie过期时间之前一直有效，即使窗口或浏览器关闭
+    3.数据与服务器之间的交互方式
+
+    cookie的数据会自动的传递到服务器，服务器端也可以写cookie到客户端
+    sessionStorage和localStorage不会自动把数据发给服务器，仅在本地保存
+
+    5.介绍一下标准的css的盒子模型？与低版本ie的盒子模型有什么不同？
+
+    CSS盒子模型：由四个属性组成的外边距(margin)、内边距(padding)、边界(border)、内容区(width和height);
+
+    标准的CSS盒子模型和低端IE CSS盒子模型不同：宽高不一样
+
+    标准的css盒子模型宽高就是内容区宽高；
+    低端IE css盒子模型宽高 内边距﹢边界﹢内容区；
+
+    6.页面导入样式时，使用link和@import有什么区别？
+
+    两者都是外部引用CSS的方式，但是存在一定的区别：
+
+    区别1：link是XHTML标签，除了加载CSS外，还可以定义RSS等其他事务；@import属于CSS范畴，只能加载CSS。
+    区别2：link引用CSS时，在页面载入时同时加载；@import需要页面网页完全载入以后加载。
+    区别3：link是XHTML标签，无兼容问题；@import是在CSS2.1提出的，低版本的浏览器不支持。
+    区别4：link支持使用Javascript控制DOM去改变样式；而@import不支持。
+
+    7.介绍一下你对浏览器内核的理解？
+
+    主要分成两个部分：渲染引擎(Render Engine)和JS引擎。
+
+    渲染引擎：负责取得网页的内容(html,xml和图像等)，整理讯息(例如假如css)，以及计算网页的显示方式，然后输出到显示器或打印机。浏览器的内核的不同对于网页的语法解释会有不同，所以渲染的效果也不同。所有网页浏览器、电子邮件客户端以及它需要编辑、显示网络内容的应用程序都需要内核。
+    JS引擎：解析和执行JavaScript来实现网页的动态效果。
+    最开始渲染引擎和JS引擎并没有区分的很明确，后来JS引擎越来越独立，内核就倾向与只指渲染引擎。
+
+    8.setTimeout与setInterval的主要区别是？
+    setTimeout()方法只运行一次，也就是说当达到设定的时间后就出发运行指定的代码，运行完后就结束了，如果还想再次执行同样的函数，可以在函数体内再次调用setTimeout()，可以达到循环调用的效果。
+    　　setInterval()是循环执行的，即每达到指定的时间间隔就执行相应的函数或者表达式，是真正的定时器。
+
+    9.前后台是如何交互的?
+    后台给你接口，你去对接，主要是json数据格式，形式主要是get和post
+    规范是接口文档，接口文档主要由后台设计和修改。
+    后台直接跟数据打交道，最清楚数据库里有什么数据，能返回什么数据。
+    前端只是数据的被动接受者，只是接口文档的使用者。
+    使用过程中，发现返回的数据不对，则跟后台商量，由后台修改。
+    切记：前端不能随意更改接口文档，除非取得后台同意。
+
+    10.谈一谈你对this理解？
+    普通函数中：this指向window
+    定时器中：this指向window
+    构造函数中：this指向当前实例化对象
+    事件处理函数中：this指向事件触发对象
+
+    
+    11.使用原型链有什么好处？
+
+
+
+
+
+
+</body>
+
+</html>

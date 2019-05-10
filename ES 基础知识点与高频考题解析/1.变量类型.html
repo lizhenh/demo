@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // ECMAScript 中定义了 6 种原始类型：
+        // Boolean
+        // String
+        // Number
+        // Null
+        // Undefined
+        // Symbol（ ES6 新定义）
+        //注意：原始类型不包含 Object
+
+
+        //题目：类型判断用到哪些方法?
+
+        //typeof null 结果是 object
+        //typeof [1, 2] 结果是 object
+        //typeof Symbol() 用 typeof 获取 symbol 类型的值得到的是 symbol
+
+        //[1, 2] instanceof Array //true
+
+
+        // 值类型 vs 引用类型
+        // 除了原始类型， ES 还有引用类型， 上文提到的 typeof 识别出来的类型中， 
+        // 只有 object和function 是引用类型， 其他都是值类型。
+
+
+        // function foo(a) {
+        //     a = a * 10;
+        // }
+
+        // function bar(b) {
+        //     b.value = 'new';
+        // }
+        // var a = 1;
+        // var b = {
+        //     value: 'old'
+        // };
+        // foo(a);
+        // bar(b);
+        // console.log(a); // 1
+        // console.log(b); // value: new
+
+
+        // 通过代码执行， 会发现：
+        // a 的值没有发生改变
+        // 而 b 的值发生了改变
+        // 这就是因为 Number 类型的 a 是按值传递的， 而 Object 类型的 b 是按共享传递的
+        
+
+        // var obj = {
+        //     a: 1,
+        //     b: [1, 2, 3]
+        // }
+        // var a = obj.a
+        // var b = obj.b
+        // a = 2
+        // b.push(4)
+        // console.log(obj)
+
+        // 虽然 obj 本身是个引用类型的变量（对象）， 但是内部的 a 和 b 一个是值类型一个是引用
+        // 类型， a 的赋值不会改变 obj.a， 但是 b 的操作却会反映到 obj 对象上。
+    </script>
+
+</body>
+
+</html>

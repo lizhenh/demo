@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //var cc = ['A', 'B', 'C'];
+
+        var cc={
+            a:1,
+            b:2,
+            c:3
+
+        }
+        cc.name = 'Hello';
+
+        for (var x in cc) {
+
+            console.log(x); // '0', '1', '2', 'name'
+
+        }
+        console.log(cc)
+
+        for...in和for...of的区别：
+        1.for in 主要是用来遍历对象，而for of主要是用来遍历数组，不能遍历对象。
+        2.for in遍历对象的时候，var key in object其中的key对应的是对象中键值所对应的键。
+        3.for in 和for of遍历数组的时候，前者key值是数组中每个元素的下标，而后者key值则是对应数组中的每人元素。
+        
+    </script>
+
+</body>
+
+</html>

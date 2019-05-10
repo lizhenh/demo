@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    1.你能描述一下渐进增强和优雅降级之间的不同吗？
+    渐进增强 progressive enhancement:
+    针对低版本浏览器进行构建页面，保证最基本的功能，然后再针对高级浏览器进行效果、
+    交互等改进和追加功能达到更好的用户体验。
+    优雅降级 graceful degradation:
+    一开始就构建完整的功能，然后再针对低版本浏览器进行兼容。
+    区别：
+    a.优雅降级是从复杂的现状开始，并试图减少用户体验的供给
+    b.渐进增强则是从一个非常基础的，能够起作用的版本开始，并不断扩充，以适应未来环境的需要
+    c.降级（功能衰减）意味着往回看；而渐进增强则意味着朝前看，同时保证其根基处于安全地带
+    2.知道CSS有个content属性吗？有什么作用？有什么应用？
+    content的意思顾名思义，是“内容”，它的作用就是在css中直接生成网页显示的 内容，
+    这个属性要结合：before和：after这俩个伪类属性来使用。
+    插入图片、嵌入文字符号、插入纯文字
+    3.你最喜欢的图片替换方法是什么，你如何选择使用。
+    图片替换主要是将文字替换成图片的技术，即在html中使用文字，
+    浏览器显示的时候用对应的图片显示，意义在于便于做网站优化（SEO），
+    文字才是搜索引擎寻找的主要对象
+
+    在日常开发中，常常会有一些文字需要用图片来美化，例如 LOGO、栏目标题等。
+    为了保障可阅读性、搜索优化以及性能优化，我们不方便直接使用 img 标签来加载图片，
+    而是使用 CSS 设置背景图片来达到替换文字的效果。
+    在此，整理了一些不错的图片替换文字的方法，供大家学习。
+
+    1、Fahrner图片替换法（FIR）
+    首先添加一个span标签，在span里写文字描述，然后用display：none隐藏起来，
+    在span的上级标签中添加背景图片。
+    优点：使用css而不是标记语法提供图片，更改图片只需要更改css
+    缺点：1）需要一组不具备任何语义的span标签2）display属性影响屏幕阅读器使用者3）
+    关闭浏览器显示图片，同时启用css支持时，文字图片均不可显示。
+    2、text-indent属性，给其设置一个较大的赋值，达到隐藏文本的效果
+    优点：（1）不需要额外标签（2）不影响屏幕阅读器使用者
+    缺点：关闭浏览器显示图片，同时启用CSS支持时，文字图片均不可显示
+    3、利用一个空白的span标签来放置背景图片，并对其进行绝对定位，
+    使用覆盖文本，达到隐藏替换文本的效果
+    <!-- <h1 class="technique-eight">
+            <span></span>w3cplus
+          </h1>
+           
+          .technique-eight {
+            width: 329px;
+            height: 79px;
+            position: relative;
+          }
+          .technique-eight span {
+            background: url(images/w3cplus-logo.png);
+            position: absolute;
+            width: 100%;
+            height: 100%;
+          } -->
+    首先，将 h2 的 position 设为 relative ，这样将使 H2 里面的元素定位以 h2 为参照，
+    然后将 span 元素绝对定位，撑满父元素，同时将背景图应用在 span 标签里面；
+    这种方法的原理是将 span 标签覆盖在文字内容上面，一旦 span 里面的背景图无法显示，
+    将显示下层的文字内容，不影响正常使用。但是，此方法也有一个缺陷，就是背景图不能透明，
+    否则将透出下面的文字。
+    4.如何进行网站的性能优化，至少写5钟
+    压缩 CSS, JS 和 HTML
+    CSS Sprites
+    减少HTTP请求
+    将样式表放在头部
+    使用轻量级框架
+    优化你的图片
+    5.请指出.bind().live().delegate()的区别
+    .bind()是直接绑定在元素上
+    .live()则是通过冒泡的方式来绑定到元素上的
+    .delegate()则是更精确的小范围使用事件代理，性能优于.live()
+    6.$和$fn的区别,或者说出$fn的用途？
+
+    Jquery为开发插件提供了两个方法，分别是：
+    $.extend(obj);$.fn.extend(obj);
+    1.那么这两个分别是什么意思？
+    $.extend(obj);是为了扩展jquery本身，为类添加新的方法
+    $.fn.extend(obj);给JQUERY对象添加方法。
+    2.$.fn 中的fn是什么意思，其实是prototype，即$.fn=$.prototype;
+    具体用法请看下面的例子：
+    $.extend({
+    add:function(a,b){
+    return a+b;
+    }
+    })
+    $.add(5,8) //return 13
+    注意没有，这边的调用直接调用，前面不用任何对象。直接$.+方法名
+    $.fn.extend(obj)；对prototype进行扩展，为jquery类添加成员函数，
+    jquery类的实例可以使用这个成员函数。
+    $.fn.extend({
+    clickwhile:function(){
+    $(this).click(function(){
+    alert($(this).val())
+    })
+    }
+    })
+    $('input').clickwhile();//当点击输入框会弹出该对象的Value值
+    注意调用时候前面是有对象的。即$('input') 这么个东西。
+
+    7.解释一下js中this是如何工作的，如何让this在传递中一直有效？
+    8.简要介绍事件代理，以及什么时候使用，事件代理发生在事件处理流程的哪个阶段，有什么好处？
+    委托它们父级代为执行事件
+    为多个元素且由js动态生成的元素添加事件时使用事件代理
+    一.事件分为三个阶段；
+    1.事件捕获；
+    2.目标阶段；
+    3.事件冒泡阶段。
+    2.1为什么要用事件委托在JavaScript中，
+    添加到页面上的事件处理程序数量将直接关系到页面的整体运行性能，
+    因为需要不断的与dom节点进行交互，访问dom的次数越多，引起浏览器重绘与重排的次数也就越多，
+    就会延长整个页面的交互就绪时间，这就是为什么性能优化的主要思想之一就是减少DOM操作的原因；
+    每个函数都是一个对象，是对象就会占用内存，对象越多，内存占用率越大，
+    100个li就要占用100个内存空间。如果要用事件委托，就会将所有的操作放到js程序里面，
+    只对它的父级(如果只有一个父级)这一个对象进行操作，与dom的操作就只需要交互一次，
+    这样就能大大的减少与dom的交互次数，提高性能；
+    9.js如何判断网页中图片加载成功或者失败？
+    <!-- 一、load事件
+    <!DOCTYPE HTML>
+    <html>
+
+    <head>
+        <meta charset="utf-8">
+        <title>img - load event</title>
+    </head>
+
+    <body>
+        <img id="img1" src="http://pic1.win4000.com/wallpaper/f/51c3bb99a21ea.jpg">
+        <p id="p1">loading...</p>
+        <script type="text/javascript">
+            img1.onload = function () {
+                p1.innerHTML = 'loaded'
+            }
+        </script>
+    </body> -->
+    10.如何阻止事件冒泡和默认事件
+
+    // 阻止浏览器的默认行为
+    window.event?window.event.returnValue=false:e.preventDefault();
+
+    //停止事件冒泡
+    window.event?window.event.cancelBubble=true:e.stopPropagation();
+    11.介绍一下Promise,底层如何实现的？
+    promise对象用于异步操作，它表示一个尚未完成且预计在未来完成的异步操作。
+    Promise的真正强大之处在于它的多重链式调用，可以避免层层嵌套回调
+    12.react性能优化是哪个周期函数？
+    shouldComponentUpdate
+
+
+</html>
+
+
+
+
+
+</body>
+
+</html>

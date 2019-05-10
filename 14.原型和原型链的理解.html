@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // function Person(name) {
+
+        //     this.name = name;
+
+        //     this.eat = function () {
+
+        //         console.log(this.name + "吃东西");
+
+        //     }
+
+        //     this.sleep = function () {
+
+        //         console.log(this.name + "睡觉");
+
+        //     }
+
+        // }
+
+        // var p1 = new Person("小明");
+
+        // p1.eat(); //小明吃东西
+
+        // p1.sleep(); //小明睡觉
+
+        // var p2 = new Person("小利");
+
+        // p2.eat(); //小利吃东西
+
+        // p2.sleep(); //小利睡觉
+
+        // console.dir(p1); //dir()打印结构
+
+        // console.dir(p2);
+
+        // 每次使用构造函数Person()实例化出对象的时候，就会给每个实例对象的eat()方法和sleep()方法开辟空间。
+        // 可是当实例化许多对象的时候，就会浪费大量的空间，因为每个实例对象的eat()方法和sleep()的功能都是一样的，
+        // 所以我们没必要为每个实例对象添加eat()方法和sleep()方法。
+
+        //这时原型就派上用场了，看下面经过改造的例子：
+
+
+        // function Person(name) {
+
+        //     this.name = name;
+
+        // } //构造函数
+
+        // Person.prototype.eat = function () {
+
+        //     console.log(this.name + "吃东西");
+
+        // };
+
+        // Person.prototype.sleep = function () {
+
+        //     console.log(this.name + "睡觉");
+
+        // }
+
+        //var p1 = new Person("小明"); //利用构造函数创建对象，叫做实例化对象
+
+        // p1.eat(); //小明吃东西
+
+        // p1.sleep(); //小明睡觉
+
+        // var p2 = new Person("小利");
+
+        // p2.eat(); //小利吃东西
+
+        // p2.sleep(); //小利睡觉
+
+        //console.dir(p1);
+
+        // console.dir(p2);
+
+        // // console.dir(Person);
+        // // console.dir(p1);
+        //  console.log(typeof p1.__proto__);//object
+        //  console.log(typeof Person.prototype);//object
+        //  console.log(p1.__proto__ === Person.prototype);//true
+
+        // Person()构造函数的prototype属性是一个对象，实例对象p1的__proto__属性也是一个对象，
+        // 并且prototype对象和__proto__对象的指向相同。那么我们再回过头来理解一下为什么添加到原型的方法可以是共享的。
+        // 因为prototype对象和__proto__对象的指向相同，所以将eat()方法和sleep()添加到Person()构造函数的prototype属性上之后，
+        // 实例对象就可以通过自己__proto__属性去访问eat()方法和sleep()了。
+
+        //实例对象和构造函数之间没用直接的关系。原型对象与实例对象之间用原型(__proto__)关联，这种关系叫做原型链。
+
+
+
+        // function Person(name) {
+
+        //     this.name = name;
+
+        // }
+
+        // Person.prototype.eat = function () {
+
+        //     console.log(this.name + "吃东西");
+
+        // };
+
+        // Person.prototype.sleep = function () {
+
+        //     console.log(this.name + "睡觉");
+
+        // }
+
+        // function Student(school) {
+
+        //     this.school = school;
+
+        // }
+
+        // Student.prototype.write = function () {
+
+        //     console.log("写作业");
+
+        // }
+        // //student指向write
+
+        // Student.prototype = new Person("小华"); 
+
+        // //改变Student()构造函数的指向，让Student()构造函数的原型对象指向Person的实例对象
+        //  var s1 = new Student("某某高中");
+
+        //  s1.eat(); //小华吃东西
+
+        //  s1.sleep(); //小华睡觉
+
+        //  //s1.write(); //Uncaught TypeError: s1.write is not a function,因为Student()的原型的指向改变，所以找不到write()方法
+
+        //  console.dir(Student);
+
+        //  console.dir(s1);
+
+
+
+
+        // function Person(name) {
+
+        //     this.name = name;
+
+        // }
+
+        // Person.prototype.eat = function () {
+
+        //     console.log(this.name + "吃东西");
+
+        // };
+
+        // Person.prototype.sleep = function () {
+
+        //     console.log(this.name + "睡觉");
+
+        // }
+
+        // function Student(name, school) { //name为父类构造器传参。子类构造器可以添加自己特有的属性school
+
+        //     Person.call(this, name); //调用父类构造器Person的属性，
+
+        //     this.school = school;
+
+        // }
+
+        // Student.prototype.write = function () {
+
+        //     console.log("写作业");
+
+        // }
+
+        // Student.prototype = new Person(); //改变Student()构造函数的指向，让Student()构造函数的原型对象指向Person的实例对象
+
+        // var s1 = new Student("zx", "某某高中");
+
+        // // s1.eat(); //小华吃东西
+
+        // // s1.sleep(); //小华睡觉
+
+        // // console.dir(Student);
+
+        // console.dir(s1);
+
+
+        // 每创建一个函数， 该函数都会自动带有一个prototype属性。
+        // 该属性是一个指针， 指向一个对象，
+        // 该对象称之为原型对象(后期我们可以使用这个原型对象帮助我们在js中实现继承).
+        // 原型对象上默认有一个属性constructor, 该属性也是一个指针， 指向其相关联的构造函数。
+        // 通过调用构造函数产生的实例对象， 都拥有一个内部属性，
+        // 指向了原型对象。 其实例对象能够访问原型对象上的所有属性和方法。
+        // 总结： 三者的关系是， 每个构造函数都有一个原型对象，
+        // 原型对象上包含着一个指向构造函数的指针， 而实例都包含着一个指向原型对象的内部指针。
+        // 通俗的说， 实例可以通过内部指针访问到原型对象， 原型对象可以通过constructor找到构造函数。
+
+        // function People() {
+        //     this.type = '人'
+        // }
+        // People.prototype.showType = function () {
+        //     alert(this.type);
+        // }
+
+        // function Woman() {
+        //     this.sex = '女';
+        //     this.age = 34;
+        // }
+        // Woman.prototype = new People();
+        // var w = new Woman();
+        // console.log('大家好,我的种类是:' + w.type + ",我的年龄是:" + w.age + ",我的性别是:" + w.sex);
+        // //输出结果:
+        // //大家好，我的种类是：人，我的年龄是:34，我的性格是:女
+        // //w.type是People上面定义的type
+
+        // 解释一下以上代码.以上代码，首先先定义了People构造函数，通过new People()得到实例，
+        // 会包含一个实例对象type和一个原型属性showType。另外定义一个Woman构造函数，
+        // 然后情况发生变化，本来构造函数woman的prototype会执行Woman的原型对象，
+        // 但是我们这里稍有改变，将Woman构造函数的prototype指向了People实例对象覆盖了woman的原型对象。
+        // 当Woman的实例对象woman去访问type属性时，js首先在woman实例属性中查找，发现没有定义，
+        // 接着去woman的原型对象上找，woman的原型对象这里已经被我们改成了People实例，
+        // 那就是去People实例上去找。先找People的实例属性，发现没有type，
+        // 最后去People的原型对象上去找，终于找到了。这个查找就是这么一级一级的往上查找。
+    </script>
+
+</body>
+
+</html>
